@@ -1,13 +1,18 @@
 package actions
 
 import (
+	"log"
+	"net/http"
+
+	"github.com/99designs/gqlgen/handler"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	forcessl "github.com/gobuffalo/mw-forcessl"
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
 
-	"github.com/bketelsen/blog/models"
+	"github.com/bketelsen/gqsamplebuffalo/gql"
+	"github.com/bketelsen/gqsamplebuffalo/models"
 	"github.com/gobuffalo/buffalo-pop/pop/popmw"
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
@@ -65,6 +70,16 @@ func App() *buffalo.App {
 	}
 
 	return app
+}
+
+func Gql() {
+	port := "3030"
+
+	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
+	http.Handle("/query", handler.GraphQL(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{}})))
+
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 // translations will load locale files, set up the translator `actions.T`,

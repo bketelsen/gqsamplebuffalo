@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/bketelsen/blog/actions"
+	"github.com/bketelsen/gqsamplebuffalo/actions"
 )
 
 // main is the starting point for your Buffalo application.
@@ -13,6 +13,7 @@ import (
 // call `app.Serve()`, unless you don't want to start your
 // application that is. :)
 func main() {
+	go actions.Gql()
 	app := actions.App()
 	if err := app.Serve(); err != nil {
 		log.Fatal(err)

@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"github.com/bketelsen/blog/models"
+	"github.com/bketelsen/gqsamplebuffalo/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"
