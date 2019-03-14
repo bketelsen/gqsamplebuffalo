@@ -1,0 +1,6 @@
+create_table("posts") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("title", "string", {})
+	t.Column("description", "string", {})
+	t.Column("markdown", "text", {})
+}
